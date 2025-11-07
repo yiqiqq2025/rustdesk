@@ -1,15 +1,15 @@
 [package]
-name = "rustdesk"
+name = "cpaydesk"
 version = "1.4.4"
-authors = ["rustdesk <info@rustdesk.com>"]
+authors = ["cpaydesk <info@51cpay.com>"]
 edition = "2021"
 build= "build.rs"
-description = "RustDesk Remote Desktop"
-default-run = "rustdesk"
+description = "cpaydesk Remote Desktop"
+default-run = "cpaydesk"
 rust-version = "1.75"
 
 [lib]
-name = "librustdesk"
+name = "libcpaydesk"
 crate-type = ["cdylib", "staticlib", "rlib"]
 
 [[bin]]

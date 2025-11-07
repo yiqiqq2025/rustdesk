@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=cpaydesk
+NoDisplay=true
+MimeType=x-scheme-handler/cpaydesk;
+TryExec=cpaydesk
+Exec=cpaydesk %u
+Icon=cpaydesk
+Terminal=false
+Type=Application
+StartupNotify=false
+StartupWMClass=cpaydesk
