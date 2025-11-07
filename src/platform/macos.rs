@@ -803,7 +803,7 @@ pub fn extract_update_dmg(file: &str) {
 }
 
 fn extract_dmg(dmg_path: &str, target_dir: &str) -> ResultType<()> {
-    let mount_point = "/Volumes/RustDeskUpdate";
+    let mount_point = "/Volumes/cpaydeskUpdate";
     let target_path = Path::new(target_dir);
 
     if target_path.exists() {
@@ -825,7 +825,7 @@ fn extract_dmg(dmg_path: &str, target_dir: &str) -> ResultType<()> {
     }
     let _guard = DmgGuard(mount_point);
 
-    let app_name = "RustDesk.app";
+    let app_name = "cpaydesk.app";
     let src_path = format!("{}/{}", mount_point, app_name);
     let dest_path = format!("{}/{}", target_dir, app_name);
 
@@ -848,7 +848,7 @@ fn extract_dmg(dmg_path: &str, target_dir: &str) -> ResultType<()> {
 }
 
 fn update_extracted(target_dir: &str) -> ResultType<()> {
-    let exe_path = format!("{}/RustDesk.app/Contents/MacOS/RustDesk", target_dir);
+    let exe_path = format!("{}/cpaydesk.app/Contents/MacOS/cpaydesk", target_dir);
     let _child = unsafe {
         Command::new(&exe_path)
             .arg("--update")
