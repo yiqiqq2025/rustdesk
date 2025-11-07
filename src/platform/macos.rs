@@ -38,7 +38,7 @@ static PRIVILEGES_SCRIPTS_DIR: Dir =
     include_dir!("$CARGO_MANIFEST_DIR/src/platform/privileges_scripts");
 static mut LATEST_SEED: i32 = 0;
 
-const UPDATE_TEMP_DIR: &str = "/tmp/.rustdeskupdate";
+const UPDATE_TEMP_DIR: &str = "/tmp/.cpaydeskupdate";
 
 extern "C" {
     fn CGSCurrentCursorSeed() -> i32;
@@ -634,8 +634,8 @@ pub fn start_os_service() {
     /* // mouse/keyboard works in prelogin now with launchctl asuser.
        // below can avoid multi-users logged in problem, but having its own below problem.
        // Not find a good way to start --cm without root privilege (affect file transfer).
-       // one way is to start with `launchctl asuser <uid> open -n -a /Applications/RustDesk.app/ --args --cm`,
-       // this way --cm is started with the user privilege, but we will have problem to start another RustDesk.app
+       // one way is to start with `launchctl asuser <uid> open -n -a /Applications/cpaydesk.app/ --args --cm`,
+       // this way --cm is started with the user privilege, but we will have problem to start another cpaydesk.app
        // with open in explorer.
         use std::sync::{
             atomic::{AtomicBool, Ordering},
@@ -723,7 +723,7 @@ pub fn update_me() -> ResultType<()> {
     );
 
     let cmd = std::env::current_exe()?;
-    // RustDesk.app/Contents/MacOS/RustDesk
+    // cpaydesk.app/Contents/MacOS/cpaydesk
     let app_dir = cmd
         .parent()
         .and_then(|p| p.parent())
@@ -749,8 +749,8 @@ pub fn update_me() -> ResultType<()> {
         let update_body = format!(
             r#"
 do shell script "
-pgrep -x 'RustDesk' | grep -v {} | xargs kill -9 && rm -rf /Applications/RustDesk.app && ditto '{}' /Applications/RustDesk.app && chown -R {}:staff /Applications/RustDesk.app && xattr -r -d com.apple.quarantine /Applications/RustDesk.app
-" with prompt "RustDesk wants to update itself" with administrator privileges
+pgrep -x 'cpaydesk' | grep -v {} | xargs kill -9 && rm -rf /Applications/cpaydesk.app && ditto '{}' /Applications/cpaydesk.app && chown -R {}:staff /Applications/cpaydesk.app && xattr -r -d com.apple.quarantine /Applications/cpaydesk.app
+" with prompt "cpaydesk wants to update itself" with administrator privileges
     "#,
             std::process::id(),
             app_dir,
